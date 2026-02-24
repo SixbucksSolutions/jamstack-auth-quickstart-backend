@@ -14,6 +14,7 @@ def ping(event, context):
     response = {
         "statusCode"    : 200, 
         "headers": {
+            "Access-Control-Allow-Origin": "https://jamstack-auth.publicntp.net",
             "Content-Type": "application/json",
         },
         "body"          : json.dumps(body, indent=4, sort_keys=True), 
@@ -31,6 +32,7 @@ def user_get(event, context):
     response = {
         "statusCode"    : 200,
         "headers": {
+            "Access-Control-Allow-Origin": "https://jamstack-auth.publicntp.net",
             "Content-Type": "application/json",
         },
         "body"          : json.dumps(body, indent=4, sort_keys=True) + "\n",

@@ -17,8 +17,6 @@ provider:
     name: api.jamstack-auth.publicntp.net
     certificateArn: arn:aws:acm:af-south-1:293119271420:certificate/3d8d5f07-08e3-46c7-bae6-b9f794b8de8d
     createRoute53Record: false
-    apiType: http
-    endpointType: regional
 
   httpApi:
     authorizers:
@@ -37,6 +35,11 @@ functions:
       - httpApi:
           path: /api/v001/ping
           method: get
+    url:
+      cors:
+        allowedOrigins:
+          - https://jamstack-auth.publicntp.net
+
 
   userGet:
     handler: handler.user_get
@@ -47,3 +50,10 @@ functions:
           method: get
           authorizer:
             name: kindeTokenAuthorizer
+    url:
+      cors:
+        allowedOrigins:
+          - https://jamstack-auth.publicntp.net
+        allowedHeaders:
+          - Authorization
+        allowCredentials: true

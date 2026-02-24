@@ -76,3 +76,61 @@ Note the ARN for the cert; we'll need this in the next step.
     * provider.domain.name: api.[your domain]
     * provider.domain.certificateArn: [ARN of imported cert in ACM from last step]
     * provider.httpApi.authorizers.kinde.TokenAuthorizer.issuerUrl: https://[your-project].kinde.com 
+
+
+## Deploy Backend
+
+### Install Serverless Framework 
+
+### Register/Login to Serverless 
+
+Beyond scope.
+
+### Deploy
+
+```bash
+serverless deploy
+```
+
+Output will be similar to:
+
+```
+endpoints:
+  GET - https://8od6x91bvf.execute-api.af-south-1.amazonaws.com/api/v001/ping
+  GET - https://8od6x91bvf.execute-api.af-south-1.amazonaws.com/api/v001/user
+functions:
+  ping: jamstack-auth-quickstart-dev-ping (1.1 kB)
+  userGet: jamstack-auth-quickstart-dev-userGet (1.1 kB)
+domain:
+  name: api.jamstack-auth.publicntp.net
+  target: d-tarosfuk7b.execute-api.af-south-1.amazonaws.com
+  zone id: Z2DHW2332DAMTN
+```
+
+### Add CNAME
+
+api.[your domain] CNAME to d-tarosfuk7b.execute-api.af-south-1.amazonaws.com
+
+### What got deployed
+
+## Test Backend
+
+```
+time curl -i https://api.jamstack-auth.publicntp.net/api/v001/ping
+```
+
+Result:
+```
+HTTP/2 200
+date: Tue, 24 Feb 2026 12:10:00 GMT
+content-type: application/json
+content-length: 26
+apigw-requestid: ZSQ7whrdifMEPeA=
+
+{
+    "message": "Pong!"
+}
+real    0m1.169s
+user    0m0.018s
+sys     0m0.003s
+```
