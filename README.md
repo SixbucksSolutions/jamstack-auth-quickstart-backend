@@ -116,7 +116,7 @@ api.[your domain] CNAME to d-tarosfuk7b.execute-api.af-south-1.amazonaws.com
 ## Test Backend
 
 ```
-time curl -i -H"Origin: https://jamstack-auth.publicntp.net" https://api.jamstack-auth.publicntp.net/api/v001/ping
+time curl -i -H "Origin: https://jamstack-auth.publicntp.net" https://api.jamstack-auth.publicntp.net/api/v001/ping
 ```
 
 Result:
