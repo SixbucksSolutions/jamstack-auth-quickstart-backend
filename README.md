@@ -75,4 +75,4 @@ Note the ARN for the cert; we'll need this in the next step.
 * Update serverless.yml
     * provider.domain.name: api.[your domain]
     * provider.domain.certificateArn: [ARN of imported cert in ACM from last step]
-    * provider.httpApi.authorizers.kinde.TokenAuthorizer.issuerUrl
+    * provider.httpApi.authorizers.kinde.TokenAuthorizer.issuerUrl: https://[your-project].kinde.com 
