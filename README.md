@@ -6,6 +6,18 @@ Serverless REST API backend for the JAMstack Auth Quickstart project
 
 ### Get project domain (Register if needed)
 
+### Create Kinde Application
+
+1. Log into kinde.com
+1. Add Application
+    * Enter a name
+    * Type: "Front-end and mobile", then Save
+    * In Quick start, select JavaScript then Save
+    * Select Existing codebase tab (under Technology, next to "Starter kit")
+    * Where is your project running: "https://[your domain]" and click Set
+    * Click Set next to callback URL and logout URL (accept defaults)
+    * Note your app-specific Kinde domain (e.g., `https://your-proj.kinde.com`)
+
 ### Get TLS cert for API Backend
  
 #### Add DNS A/AAAA records
@@ -56,3 +68,11 @@ We'll be doing a CNAME later for this.
   * Paste contents of chain.pem into "Certificate chain"
 
 Note the ARN for the cert; we'll need this in the next step.
+
+### Modify serverless.yml
+
+* Go to api/
+* Update serverless.yml
+    * provider.domain.name: api.[your domain]
+    * provider.domain.certificateArn: [ARN of imported cert in ACM from last step]
+    * provider.httpApi.authorizers.kinde.TokenAuthorizer.issuerUrl

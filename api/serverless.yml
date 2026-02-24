@@ -1,0 +1,48 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: firsttracks
+
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: fafauth-api
+
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: jamstack-auth-quickstart
+
+
+provider:
+  name: aws
+  region: af-south-1
+  runtime: python3.14
+
+  domain:
+    name: api.jamstack-auth.publicntp.net
+    certificateArn: arn:aws:acm:af-south-1:293119271420:certificate/3d8d5f07-08e3-46c7-bae6-b9f794b8de8d
+    createRoute53Record: false
+    apiType: http
+    endpointType: regional
+
+  httpApi:
+    authorizers:
+      kindeTokenAuthorizer:
+        type: jwt
+        issuerUrl: https://sixbuckssolutionsllc.kinde.com/.well-known/jwks
+
+
+functions:
+
+  ping:
+    handler: handler.ping
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /api/v001/ping
+          method: get
+
+  userGet:
+    handler: handler.user_get
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /api/v001/user
+          method: get
+          authorizer:
+            name: kindeTokenAuthorizer
