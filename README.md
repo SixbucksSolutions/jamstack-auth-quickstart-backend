@@ -116,21 +116,24 @@ api.[your domain] CNAME to d-tarosfuk7b.execute-api.af-south-1.amazonaws.com
 ## Test Backend
 
 ```
-time curl -i https://api.jamstack-auth.publicntp.net/api/v001/ping
+time curl -i -H"Origin: https://jamstack-auth.publicntp.net" https://api.jamstack-auth.publicntp.net/api/v001/ping
 ```
 
 Result:
 ```
-HTTP/2 200
-date: Tue, 24 Feb 2026 12:10:00 GMT
+date: Tue, 24 Feb 2026 12:43:31 GMT
 content-type: application/json
 content-length: 26
-apigw-requestid: ZSQ7whrdifMEPeA=
+access-control-allow-origin: https://jamstack-auth.publicntp.net
+apigw-requestid: ZSV2Bh7CCfMEPSw=
 
 {
     "message": "Pong!"
 }
-real    0m1.169s
-user    0m0.018s
+real    0m0.788s
+user    0m0.019s
 sys     0m0.003s
 ```
+
+Note: we passed the Origin request header and the API replied saying it was an allowed origin, 
+so this is a CORS-friendly API
