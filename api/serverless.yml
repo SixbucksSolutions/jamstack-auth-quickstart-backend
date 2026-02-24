@@ -35,11 +35,6 @@ functions:
       - httpApi:
           path: /api/v001/ping
           method: get
-    url:
-      cors:
-        allowedOrigins:
-          - https://jamstack-auth.publicntp.net
-
 
   userGet:
     handler: handler.user_get
@@ -50,10 +45,3 @@ functions:
           method: get
           authorizer:
             name: kindeTokenAuthorizer
-    url:
-      cors:
-        allowedOrigins:
-          - https://jamstack-auth.publicntp.net
-        allowedHeaders:
-          - Authorization
-        allowCredentials: true

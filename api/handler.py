@@ -33,6 +33,7 @@ def user_get(event, context):
         "statusCode"    : 200,
         "headers": {
             "Access-Control-Allow-Origin": "https://jamstack-auth.publicntp.net",
+            "Access-Control-Allow-Credentials": True,
             "Content-Type": "application/json",
         },
         "body"          : json.dumps(body, indent=4, sort_keys=True) + "\n",
