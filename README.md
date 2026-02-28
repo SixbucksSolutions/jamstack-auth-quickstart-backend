@@ -115,6 +115,8 @@ api.[your domain] CNAME to d-tarosfuk7b.execute-api.af-south-1.amazonaws.com
 
 ## Test Backend
 
+### Ping Endpoint
+
 ```
 time curl -i -H "Origin: https://jamstack-auth.publicntp.net" https://api.jamstack-auth.publicntp.net/api/v001/ping
 ```
@@ -137,3 +139,65 @@ sys     0m0.003s
 
 Note: we passed the Origin request header and the API replied saying it was an allowed origin, 
 so this is a CORS-friendly API
+
+Run this a few times to see the cold start penalty drop.
+
+### Get User Endpoint
+
+```
+$ time curl -i -H "Origin: https://jamstack-auth.publicntp.net" https://8od6x91bvf.execute-api.af-south-1.amazonaws.com/api/v001/user
+```
+
+Result:
+```
+HTTP/2 401
+date: Fri, 27 Feb 2026 09:28:22 GMT
+content-type: application/json
+content-length: 26
+www-authenticate: Bearer
+apigw-requestid: ZbyEkhg1ifMEJLA=
+
+{"message":"Unauthorized"}
+```
+
+Got a 401 "Not Authorized" response because we didn't pass authentication.
+
+Note the `www-authenticate: Bearer` header that APIGW attaches. It tells the client
+what credentials this endpoint expects (in our case, an OAuth bearer token).
+
+## Prep Frontend
+
+### Add auth CNAME
+
+To to your DNS and add a CNAME from auth.[your-dmain] to your Kinde OIDC server.
+
+### Test CNAME
+
+```
+$ dig auth.jamstack-auth.publicntp.net
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> auth.jamstack-auth.publicntp.net
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 43191
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;auth.jamstack-auth.publicntp.net. IN   A
+
+;; ANSWER SECTION:
+auth.jamstack-auth.publicntp.net. 41 IN CNAME   sixbuckssolutionsllc.kinde.com.
+sixbuckssolutionsllc.kinde.com. 41 IN   A       35.160.27.135
+sixbuckssolutionsllc.kinde.com. 41 IN   A       52.40.72.86
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Fri Feb 27 09:47:08 UTC 2026
+;; MSG SIZE  rcvd: 137
+```
+
+So the CNAME is up.
+
+

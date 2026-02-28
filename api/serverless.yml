@@ -7,7 +7,6 @@ app: fafauth-api
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: jamstack-auth-quickstart
 
-
 provider:
   name: aws
   region: af-south-1
@@ -22,9 +21,9 @@ provider:
     authorizers:
       kindeTokenAuthorizer:
         identitySource: $request.header.Authorization
-        issuerUrl: https://sixbuckssolutionsllc.kinde.com
+        issuerUrl: https://auth.jamstack-auth.publicntp.net
         audience:
-          - api.jamstack-auth.publicntp.net
+          - jamstack-auth.publicntp.net
 
 functions:
 
