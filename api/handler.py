@@ -64,18 +64,8 @@ def user_get(event, context):
 
     logger.info("No explosion when querying user")
 
- 
-    env_var_names: list[str] = [
-        "MGMT_API_CLIENT_ID",
-        "MGMT_API_CLIENT_SECRET",
-    ]
-
-    env_vars: dict[str, str] = {}
-    for curr_name in env_var_names:
-        env_vars[curr_name] = os.environ.get(curr_name)
-
     body = {
-        "env_vars": env_vars,
+        "retrieved_user": user,
     }
 
     response = {
@@ -85,7 +75,7 @@ def user_get(event, context):
             "Access-Control-Allow-Credentials": True,
             "Content-Type": "application/json",
         },
-        "body"          : json.dumps(body, indent=4, sort_keys=True) + "\n",
+        "body"          : json.dumps(body, indent=4, sort_keys=True, default=str) + "\n",
     }
 
     return response
