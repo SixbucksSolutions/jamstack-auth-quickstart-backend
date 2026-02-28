@@ -59,6 +59,11 @@ def user_get(event, context):
         client_id=os.environ.get("MGMT_API_CLIENT_ID"),
         client_secret=os.environ.get("MGMT_API_CLIENT_SECRET"),
     )
+
+    user = mgmt_client.get_user(id=client_oauth_claim_sub)
+
+    logger.info("No explosion when querying user")
+
  
     env_var_names: list[str] = [
         "MGMT_API_CLIENT_ID",
