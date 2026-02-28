@@ -45,6 +45,9 @@ functions:
     handler: handler.user_get
     memorySize: 128
     environment:
+      # For mgmt API access
+      KINDE_AUDIENCE: ${param:KINDE_AUDIENCE}
+
       # Required vars, even if MGMT mirrors them. :(
       KINDE_CLIENT_ID: ${param:KINDE_CLIENT_ID}
       KINDE_CLIENT_SECRET: ${param:KINDE_CLIENT_SECRET}
