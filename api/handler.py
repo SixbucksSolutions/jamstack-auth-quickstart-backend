@@ -1,5 +1,9 @@
 import json
 import logging
+import os
+
+import kinde_sdk.auth.async_oauth
+
 
 logger = logging.getLogger()
 logger.setLevel("INFO")
@@ -24,9 +28,22 @@ def ping(event, context):
 
 
 def user_get(event, context):
+    env_var_names: list[str] = [
+        "KINDE_CLIENT_ID",
+        "KINDE_CLIENT_SECRET",
+        "MGMT_API_CLIENT_ID",
+        "MGMT_API_CLIENT_SECRET",
+    ]
 
+    env_vars: dict[str, str] = {}
+    for curr_name in env_var_names:
+        env_vars[curr_name] = os.environ.get(curr_name)
+
+    # Initialize Kinde AsyncOAuth client
+    oauth_client = kinde_sdk.auth.async_oauth.AsyncOAuth()
+ 
     body = {
-        "event": event,
+        "env_vars": env_vars,
     }
 
     response = {

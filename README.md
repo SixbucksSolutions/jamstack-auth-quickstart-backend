@@ -44,6 +44,13 @@ Serverless REST API backend for the JAMstack Auth Quickstart project
     * Client ID
     * Client Secret
 
+
+
+### Authorize the Management API for the Backend Application
+
+* Applications > Backend App > APIs
+* Enable mgmt API for the backend API
+
 ### Store Backend Parameters In Parameter Store
 
 * add parameters
