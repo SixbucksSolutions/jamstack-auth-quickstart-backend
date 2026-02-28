@@ -18,9 +18,17 @@ provider:
     createRoute53Record: false
 
   httpApi:
+
+    # Disable the default 'execute-api' HTTP endpoint as we are using a custom domain
+    disableDefaultEndpoint: true
+
     authorizers:
       kindeTokenAuthorizer:
         identitySource: $request.header.Authorization
+
+        # Cache allow/deny determinations for a given bearer token for one hour
+        resultTtlInSeconds: 3600
+
         issuerUrl: https://auth.jamstack-auth.publicntp.net
         audience:
           - https://api.jamstack-auth.publicntp.net
