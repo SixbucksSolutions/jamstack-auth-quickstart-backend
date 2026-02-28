@@ -64,9 +64,7 @@ def user_get(event, context):
 
     logger.info("No explosion when querying user")
 
-    body = {
-        "retrieved_user": user,
-    }
+    body = user.to_dict()
 
     response = {
         "statusCode"    : 200,
