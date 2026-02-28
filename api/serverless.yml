@@ -52,3 +52,7 @@ functions:
           method: get
           authorizer:
             name: kindeTokenAuthorizer
+
+custom:
+  pythonRequirements:
+    dockerizePip: true

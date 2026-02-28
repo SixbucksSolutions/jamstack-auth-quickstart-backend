@@ -33,6 +33,26 @@ Serverless REST API backend for the JAMstack Auth Quickstart project
 * Click triple dots
 * Click "Authorize application"
 
+### Create Kinde Application For API Backend
+
+* Settings > Applications > Add Application
+    * Name: jamstack-auth-quickstart-backend
+    * Type: Machine to machine
+    * Click Create
+* Write down
+    * Custom Domain
+    * Client ID
+    * Client Secret
+
+### Store Backend Parameters In Parameter Store
+
+* add parameters
+
+### Give the getUser method permissions to read those parameter store keys
+
+* Fafauth has that I think?
+* Yeah https://github.com/TerryOtt/fafauth/blob/main/api/af-south-1/serverless.yml#L29
+
 ### Get TLS cert for API Backend
  
 #### Add DNS A/AAAA records
