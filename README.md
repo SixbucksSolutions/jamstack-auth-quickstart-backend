@@ -18,6 +18,21 @@ Serverless REST API backend for the JAMstack Auth Quickstart project
     * Click Set next to callback URL and logout URL (accept defaults)
     * Note your app-specific Kinde domain (e.g., `https://your-proj.kinde.com`)
 
+### Register your API
+
+* Admin > Settings > APIs
+* Name: Something memorable
+* Audience: https://api.[your domain]
+* Click Save
+
+### Hook your API to your app
+
+
+* Admin > Settings > Application > API's
+* Your new API will show up
+* Click triple dots
+* Click "Authorize application"
+
 ### Get TLS cert for API Backend
  
 #### Add DNS A/AAAA records

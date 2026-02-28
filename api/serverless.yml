@@ -23,7 +23,7 @@ provider:
         identitySource: $request.header.Authorization
         issuerUrl: https://auth.jamstack-auth.publicntp.net
         audience:
-          - jamstack-auth.publicntp.net
+          - https://api.jamstack-auth.publicntp.net
 
 functions:
 
